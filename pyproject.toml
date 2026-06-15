@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gra_living_vaccine"
+version = "0.2.0"
+description = "Self-Learning Vaccine Architecture based on GRA nullification"
+authors = [{name = "GRA Community"}]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "pyyaml>=6.0",
+    "numpy>=1.24"
+]

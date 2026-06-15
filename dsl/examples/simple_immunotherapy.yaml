@@ -1,0 +1,41 @@
+agent:
+  id: simple_immunotherapy_agent
+  state:
+    - name: energy
+      initial: 0.5
+    - name: activation
+      initial: 0.0
+  rules:
+    - name: activate_on_high_infection
+      condition:
+        any_of:
+          - all_of:
+              - type: signal
+                name: infection_level
+                op: ">"
+                value: 0.7
+              - type: state
+                name: energy
+                op: ">"
+                value: 0.3
+      action:
+        type: therapeutic_effect
+        params:
+          delta_activation: 0.2
+          cost_energy: 0.1
+    - name: soft_nullify_on_overactivation
+      condition:
+        any_of:
+          - all_of:
+              - type: state
+                name: activation
+                op: ">"
+                value: 1.0
+      action:
+        type: nullify
+        params:
+          policy: soft
+  stability:
+    max_activation_level: 1.0
+    nullification_policy:
+      type: soft

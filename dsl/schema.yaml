@@ -1,0 +1,29 @@
+# DSL Schema for GRA-Living-Vaccine agent specification
+# See paper.tex Section 4 for formal description
+
+agent:
+  id: string
+  state:
+    - name: string
+      initial: float
+  rules:
+    - name: string
+      condition:
+        any_of:
+          - all_of:
+              - type: signal | state
+                name: string
+                op: ">" | "<" | ">=" | "<=" | "==" | "!="
+                value: float
+      action:
+        type: therapeutic_effect | change_state | nullify | love_transfer
+        params:
+          delta_activation: float  # for therapeutic_effect, change_state
+          cost_energy: float       # for therapeutic_effect
+          policy: hard | soft | love_oriented  # for nullify
+          transfer_fraction: float # for love_transfer
+  stability:
+    max_activation_level: float
+    nullification_policy:
+      type: hard | soft | love_oriented
+      transfer_fraction: float

@@ -1,0 +1,41 @@
+agent:
+  id: cancer_nullification_agent
+  state:
+    - name: energy
+      initial: 0.8
+    - name: activation
+      initial: 0.0
+    - name: toxicity
+      initial: 0.0
+  rules:
+    - name: attack_cancer
+      condition:
+        any_of:
+          - all_of:
+              - type: signal
+                name: infection_level
+                op: ">"
+                value: 0.6
+      action:
+        type: therapeutic_effect
+        params:
+          delta_activation: 0.3
+          cost_energy: 0.15
+    - name: love_nullify_on_high_toxicity
+      condition:
+        any_of:
+          - all_of:
+              - type: state
+                name: toxicity
+                op: ">"
+                value: 0.8
+      action:
+        type: nullify
+        params:
+          policy: love_oriented
+          transfer_fraction: 0.8
+  stability:
+    max_activation_level: 1.0
+    nullification_policy:
+      type: love_oriented
+      transfer_fraction: 0.8
