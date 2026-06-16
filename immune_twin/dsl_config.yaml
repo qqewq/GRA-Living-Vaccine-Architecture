@@ -1,0 +1,30 @@
+# Пример DSL-описания роя GRA
+# Для будущего интерпретатора
+
+swarm:
+  name: "GRA-Immune-Swarm"
+
+  roles:
+    - name: Scout
+      count: 10
+      detection_radius: 10
+      phi_threshold: 2.0
+
+    - name: Nullifier
+      count: 20
+      suppression_radius: 3
+      suppression_factor: 0.2
+      step_size: 2.0
+
+    - name: Memory
+      count: 5
+      memory_radius: 5
+
+  environment:
+    width: 100
+    height: 100
+    n_tumor: 50
+
+  simulation:
+    steps: 200
+    seed: null
